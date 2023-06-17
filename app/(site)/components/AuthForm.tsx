@@ -70,7 +70,6 @@ const AuthForm = () => {
                         disabled={isLoading}
                         fullWidth
                         type='submit'
-
                     > 
                         {/* This abomination works like this:
                             if isLoading = false 
