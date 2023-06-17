@@ -37,7 +37,8 @@ const Input: React.FC<InputProps> = ({
 
     return (
         <div>
-            <label className={`${isInputFocused ? '-translate-x-2' : ''} block text-sm font-medium leading-6 text-gray-900 transition-transform`}
+            <label className={`block text-sm leading-6 text-gray-900 transition-transform duration-300 
+            ${isInputFocused ? '-translate-x-2 font-bold' : 'font-medium'}`}
             htmlFor="{id}">{label}</label>
             <div className="mt-2">
                 <input 
@@ -64,7 +65,7 @@ const Input: React.FC<InputProps> = ({
                         focus:ring-inset
                         focus:ring-orange-600
                         sm:text-sm
-                        sm:leading-6`, 
+                        sm:leading-6`,                    
                         errors[id] && "focus:ring-rose-500",
                         disabled && "opacity-50 cursor-default"
                         )}
