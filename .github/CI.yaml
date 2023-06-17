@@ -1,6 +1,9 @@
 name: npm run build
 
-on: [push]
+on:
+  push:
+    branches:
+      - '*'
 
 jobs:
   build:
