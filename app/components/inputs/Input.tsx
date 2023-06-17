@@ -27,27 +27,25 @@ const Input: React.FC<InputProps> = ({
 
     const [isInputFocused, setIsInputFocused] = useState(false)
 
-    const onFocus = () => {
-        setIsInputFocused(true)
-    }
-
-    const onFocusOut = () => {
-        setIsInputFocused(false)
-    }
-
     return (
         <div>
-            <label className={`block text-sm leading-6 text-gray-900 transition-transform duration-300 
-            ${isInputFocused ? '-translate-x-2 font-bold' : 'font-medium'}`}
-            htmlFor="{id}">{label}</label>
+            <label 
+                className={clsx(
+                    `block text-sm leading-6 text-gray-900 transition-transform duration-300`, 
+                    isInputFocused ? '-translate-x-2 font-bold' : 'font-medium'
+                    )}
+                htmlFor="{id}"
+            >
+                {label}
+            </label>
             <div className="mt-2">
                 <input 
-                    onFocus={onFocus}                    
+                    onFocus={() => setIsInputFocused(true)}                    
                     id={id} 
                     type={type} 
                     autoComplete={id} 
                     {...register(id, { required:required })}
-                    onBlur={onFocusOut}
+                    onBlur={() => setIsInputFocused(false)}
                     className={clsx(`                    
                         form-input
                         block
