@@ -4,6 +4,7 @@ interface AuthSocialButtonProps {
     icon: IconType,
     onClick: () => void
 }
+
 const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
     icon: Icon,
     onClick
@@ -29,7 +30,7 @@ const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
                 focus:outline-offset-0
             '
         >
-            <Icon></Icon>
+            <Icon />
         </button>
     )
 }
