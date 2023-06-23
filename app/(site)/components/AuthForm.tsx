@@ -1,14 +1,15 @@
 'use client'
 
+import axios from "axios"
 import { useCallback, useState } from "react"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import { BsGithub, BsGoogle } from 'react-icons/bs'
 
-import Input from "@/app/components/inputs/Input";
-import Button from "@/app/components/Button";
+import Input from "@/app/components/inputs/Input"
+import Button from "@/app/components/Button"
 import { Bars, Circles } from "react-loading-icons"
 import { Ring } from '@uiball/loaders'
-import AuthSocialButton from "./AuthSocialButton";
+import AuthSocialButton from "./AuthSocialButton"
 
 type PageType = 'LOGIN' | 'REGISTER'
 
@@ -39,8 +40,7 @@ const AuthForm = () => {
         console.log("are new sbumits coming?")
 
         if (pageType === 'REGISTER'){
-            // Axios Register
-            console.log('REGISTER')
+            axios.post('/api/register', data)            
         }
 
         if (pageType === 'LOGIN'){
