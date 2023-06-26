@@ -1,9 +1,9 @@
 'use client'
 
 import axios from "axios"
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
-import { BsGithub, BsGoogle } from 'react-icons/bs'
+import { BsApple, BsFacebook, BsGithub, BsGoogle } from 'react-icons/bs'
 
 import Input from "@/app/components/inputs/Input"
 import Button from "@/app/components/Button"
@@ -12,13 +12,23 @@ import { Ring } from '@uiball/loaders'
 import AuthSocialButton from "./AuthSocialButton"
 
 import { toast } from "react-hot-toast"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 type PageType = 'LOGIN' | 'REGISTER'
 
 const AuthForm = () => {
+    const session = useSession()
+    const router = useRouter()
+
     const [pageType, setPageType] = useState<PageType>('LOGIN')
     const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        if (session?.status === 'authenticated') {
+            router.push('/users')
+        }
+    }, [session?.status, router])
 
     const togglePageType = useCallback(() => {
         pageType === 'LOGIN' ? setPageType('REGISTER') : setPageType('LOGIN')
@@ -125,7 +135,7 @@ const AuthForm = () => {
                             </span>
                         </div>
                     </div>                    
-                    <div className="mt-6 flex gap-2">
+                    <div className="mt-5 grid grid-cols-2 gap-2">
                         <AuthSocialButton 
                             icon={BsGithub} 
                             onClick={() => socialAction('github')}
@@ -133,6 +143,14 @@ const AuthForm = () => {
                         <AuthSocialButton 
                             icon={BsGoogle} 
                             onClick={() => socialAction('google')}
+                        />
+                        <AuthSocialButton 
+                            icon={BsApple} 
+                            onClick={() => socialAction('apple')}
+                        />
+                        <AuthSocialButton 
+                            icon={BsFacebook} 
+                            onClick={() => socialAction('facebook')}
                         />
                     </div>
                     <div className="
