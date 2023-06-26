@@ -11,6 +11,9 @@ import { Bars, Circles } from "react-loading-icons"
 import { Ring } from '@uiball/loaders'
 import AuthSocialButton from "./AuthSocialButton"
 
+import { toast } from "react-hot-toast"
+import { signIn } from "next-auth/react"
+
 type PageType = 'LOGIN' | 'REGISTER'
 
 const AuthForm = () => {
@@ -40,19 +43,44 @@ const AuthForm = () => {
         console.log("are new sbumits coming?")
 
         if (pageType === 'REGISTER'){
-            axios.post('/api/register', data)            
+            axios.post('/api/register', data)  
+            .catch(() => toast.error('Something went wrong!'))
+            .finally(() => setIsLoading(false))         
         }
 
         if (pageType === 'LOGIN'){
-            // NextAuth email sign in
-            console.log('LOGIN')
+            signIn('credentials', {
+                ...data,
+                redirect: false
+            })
+            .then((callback) =>{
+                if (callback?.error){
+                    toast.error("Invalid Credentials")
+                }
+
+                if (callback?.ok && !callback?.error) {
+                    toast.success('Success')
+                    // todo: login the user, change the page
+                }
+            })
+            .finally(() => setIsLoading(false))
         }
     }
 
     const socialAction = (action: string) => {
         setIsLoading(true)
 
-        // NextAuth Social SignIn
+        signIn(action, { redirect: false })
+        .then((callback) => {
+            if (callback?.error){
+                toast.error("Something went wrong")
+            }
+
+            if (callback?.ok && !callback?.error) {
+                toast.success('Success with Social Login ' + { action })
+            }
+        })
+        .finally(() => setIsLoading(false))
     }
 
     return (
