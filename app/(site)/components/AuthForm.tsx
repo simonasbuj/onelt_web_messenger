@@ -54,6 +54,7 @@ const AuthForm = () => {
 
         if (pageType === 'REGISTER'){
             axios.post('/api/register', data)  
+            .then(() => signIn('credentials', data))
             .catch(() => toast.error('Something went wrong!'))
             .finally(() => setIsLoading(false))         
         }
@@ -69,7 +70,7 @@ const AuthForm = () => {
                 }
 
                 if (callback?.ok && !callback?.error) {
-                    toast.success('Success')
+                    //toast.success('Success')
                     // todo: login the user, change the page
                 }
             })
