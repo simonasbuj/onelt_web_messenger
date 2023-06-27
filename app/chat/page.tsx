@@ -2,8 +2,9 @@
 
 import { signOut } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import EmptyState from "../components/EmptyState"
 
-const Users = () => {
+const Chat = () => {
     const router = useRouter()
 
     return (
@@ -15,11 +16,15 @@ const Users = () => {
                     onClick={() => signOut({ callbackUrl: '/' })}
                 >
                     Logout
-                </button>
-            </div>            
+                </button>                
+            </div>  
+              
+            <div className="hidden lg:block lg:pl-80 h-full">
+                <EmptyState />
+            </div>        
         </>
         
     )
 }
 
-export default Users
+export default Chat
