@@ -3,7 +3,7 @@
 import axios from "axios"
 import { useCallback, useEffect, useState } from "react"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
-import { BsApple, BsFacebook, BsGithub, BsGoogle } from 'react-icons/bs'
+import { BsApple, BsFacebook, BsGithub, BsGoogle, BsInstagram } from 'react-icons/bs'
 
 import Input from "@/app/components/inputs/Input"
 import Button from "@/app/components/Button"
@@ -50,7 +50,6 @@ const AuthForm = () => {
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true)
-        console.log("are new sbumits coming?")
 
         if (pageType === 'REGISTER'){
             axios.post('/api/register', data)  
@@ -89,6 +88,7 @@ const AuthForm = () => {
 
             if (callback?.ok && !callback?.error) {
                 toast.success('Success with Social Login ' + { action })
+                console.log("social auth login OK")
             }
         })
         .finally(() => setIsLoading(false))
@@ -152,6 +152,10 @@ const AuthForm = () => {
                         <AuthSocialButton 
                             icon={BsFacebook} 
                             onClick={() => socialAction('facebook')}
+                        />
+                        <AuthSocialButton 
+                            icon={BsInstagram} 
+                            onClick={() => socialAction('instagram')}
                         />
                     </div>
                     <div className="
