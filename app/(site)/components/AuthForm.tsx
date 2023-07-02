@@ -26,7 +26,7 @@ const AuthForm = () => {
 
     useEffect(() => {
         if (session?.status === 'authenticated') {
-            router.push('/chat')
+            router.push('/users')
         }
     }, [session?.status, router])
 
