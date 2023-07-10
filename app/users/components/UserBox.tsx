@@ -18,11 +18,11 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
     const handleClick = useCallback(() => {
         setIsLoading(true)
 
-        axios.post('/api/converstations', {
+        axios.post('/api/conversations', {
             userId: user.id
         })
         .then((data) => {
-            router.push(`/converstations/${data.data.id}`)
+            router.push(`/conversations/${data.data.id}`)
         })  
         .finally(() => setIsLoading(false))
     }, [user, router])
@@ -41,7 +41,6 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
                 hover:bg-orange-300
                 transition
                 cursor-pointer
-                mt-1         
                 rounded-md   
             "
         >

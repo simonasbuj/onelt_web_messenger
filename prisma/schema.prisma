@@ -1,6 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// for changes, just run npx prisma db push
+// for mongodb adding columns or removing tables dont need to be pushed...
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -73,7 +76,7 @@ model Message {
   seen User[] @relation("Seen", fields: [seenIds], references: [id])
 
   conversationId String @db.ObjectId
-  conversationt Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 
   senderId String @db.ObjectId
   sender User @relation(fields: [senderId], references: [id], onDelete: Cascade)
